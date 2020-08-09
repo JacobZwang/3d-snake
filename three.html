@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>3D Snake</title>
+  </head>
+
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.js"></script>
+    <script>
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(
+        35,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setClearColor(0xeeeeee);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      camera.position.z = 25;
+      camera.position.y = 5;
+      camera.position.x = 4;
+
+      // snake material
+      var material = new THREE.MeshStandardMaterial({
+        metalness: 0,
+        roughness: 0.5,
+      });
+
+      // generate snake cube
+      var geometry = new THREE.BoxGeometry();
+      function generateSnake(x, y, z) {
+        var cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        cube.position.set(x, y, z);
+      }
+
+      function setup() {
+        var xspeed = 1;
+        var yspeed = 0;
+        var zspeed = 0;
+        var x = 1;
+        var y = 1;
+        var z = 1;
+        setInterval(function () {
+          while (scene.children.length > 0) {
+            scene.remove(scene.children[0]);
+          }
+          x = x + xspeed;
+          y = y + yspeed;
+          z = z + zspeed;
+          generateSnake(x, y, z);
+        }, 500);
+        document.addEventListener("keydown", function (event) {
+          if (event.code == "KeyS") {
+            xspeed = 0;
+          }
+        });
+      }
+      setup();
+
+      //lights
+      var light = new THREE.AmbientLight(0x404040);
+      scene.add(light);
+      var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+      scene.add(directionalLight);
+
+      //render
+      function render() {
+        requestAnimationFrame(render);
+
+        renderer.render(scene, camera);
+      }
+      render();
+    </script>
+  </body>
+</html>
+<style>
+  * {
+    margin: 0px;
+    overflow: hidden;
+  }
+</style>
