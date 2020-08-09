@@ -89,6 +89,18 @@
             fruitz = Math.floor(Math.random() * 10) + 1;
           }
 
+          if (x > 10) {
+            x = 0;
+          }
+
+          if (y > 10) {
+            y = 0;
+          }
+
+          if (z > 10) {
+            z = 0;
+          }
+
           tail.push({ x, y, z });
           var i = 1;
           while (tail.length > length) {
