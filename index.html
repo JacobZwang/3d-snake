@@ -84,6 +84,9 @@
 
           if (x === fruitx && y === fruity && z === fruitz) {
             length = length + 1;
+            fruitx = Math.floor(Math.random() * 10) + 1;
+            fruity = Math.floor(Math.random() * 10) + 1;
+            fruitz = Math.floor(Math.random() * 10) + 1;
           }
 
           tail.push({ x, y, z });
