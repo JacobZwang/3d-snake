@@ -39,6 +39,14 @@
         cube.position.set(x, y, z);
       }
 
+      // generate fruit
+      var fruit = new THREE.BoxGeometry();
+      function generateFruit(x, y, z) {
+        var fruitobj = new THREE.Mesh(fruit, material);
+        scene.add(fruitobj);
+        fruitobj.position.set(x, y, z);
+      }
+
       function setup() {
         var xspeed = 1;
         var yspeed = 0;
@@ -46,6 +54,9 @@
         var x = 1;
         var y = 1;
         var z = 1;
+        var fruitx = 5;
+        var fruity = 1;
+        var fruitz = 1;
         setInterval(function () {
           while (scene.children.length > 0) {
             scene.remove(scene.children[0]);
@@ -54,10 +65,32 @@
           y = y + yspeed;
           z = z + zspeed;
           generateSnake(x, y, z);
+          generateSnake(fruitx, fruity, fruitz);
+
+          if (x === fruitx && y === fruity && z === fruitz) {
+            console.log("it worked");
+          }
         }, 500);
         document.addEventListener("keydown", function (event) {
           if (event.code == "KeyS") {
             xspeed = 0;
+            yspeed = -1;
+            zspeed = 0;
+          }
+          if (event.code == "KeyW") {
+            xspeed = 0;
+            yspeed = 1;
+            zspeed = 0;
+          }
+          if (event.code == "KeyD") {
+            xspeed = 1;
+            yspeed = 0;
+            zspeed = 0;
+          }
+          if (event.code == "KeyA") {
+            xspeed = -1;
+            yspeed = 0;
+            zspeed = 0;
           }
         });
       }
