@@ -98,12 +98,12 @@
         }, 200);
 
         document.addEventListener("keydown", function (event) {
-          if (event.code == "KeyS") {
+          if (event.code == "KeyQ") {
             xspeed = 0;
             yspeed = -1;
             zspeed = 0;
           }
-          if (event.code == "KeyW") {
+          if (event.code == "KeyE") {
             xspeed = 0;
             yspeed = 1;
             zspeed = 0;
@@ -117,6 +117,16 @@
             xspeed = -1;
             yspeed = 0;
             zspeed = 0;
+          }
+          if (event.code == "KeyW") {
+            xspeed = 0;
+            yspeed = 0;
+            zspeed = -1;
+          }
+          if (event.code == "KeyS") {
+            xspeed = 0;
+            yspeed = 0;
+            zspeed = 1;
           }
         });
       }
