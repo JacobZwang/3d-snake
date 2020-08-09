@@ -9,7 +9,7 @@
     <script>
       var scene = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera(
-        75,
+        35,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
@@ -46,10 +46,19 @@
         geometry.vertices.push(new THREE.Vector3(x, y, z));
         var line = new THREE.Line(geometry, material);
         scene.add(line);
-        camera.position.z = 4;
       }
 
-      generateGridCube(1, 1, 1);
+      camera.position.z = 25;
+      camera.position.y = 5;
+      camera.position.x = 4;
+
+      for (y = 0; y < 10; y++) {
+        for (z = 0; z < 10; z++) {
+          for (x = 0; x < 10; x++) {
+            generateGridCube(x, y, z);
+          }
+        }
+      }
 
       function render() {
         requestAnimationFrame(render);
