@@ -25,15 +25,13 @@
       camera.position.y = 5;
       camera.position.x = 4;
 
-      // snake material
-      var material = new THREE.MeshStandardMaterial({
-        metalness: 0,
-        roughness: 0.5,
-      });
-
-      // generate snake cube
       var geometry = new THREE.BoxGeometry();
       function generateSnake(x, y, z) {
+        var material = new THREE.MeshStandardMaterial({
+          metalness: 0,
+          roughness: 0.5,
+        });
+
         var cube = new THREE.Mesh(geometry, material);
         scene.add(cube);
         cube.position.set(x, y, z);
@@ -42,6 +40,11 @@
       // generate fruit
       var fruit = new THREE.BoxGeometry();
       function generateFruit(x, y, z) {
+        var material = new THREE.MeshStandardMaterial({
+          metalness: 0,
+          roughness: 0.5,
+        });
+
         var fruitobj = new THREE.Mesh(fruit, material);
         scene.add(fruitobj);
         fruitobj.position.set(x, y, z);
@@ -57,20 +60,43 @@
         var fruitx = 5;
         var fruity = 1;
         var fruitz = 1;
+        var length = 1;
+        var tail = [{ x: 1, y: 1, z: 1 }];
+
         setInterval(function () {
           while (scene.children.length > 0) {
             scene.remove(scene.children[0]);
           }
+          var light = new THREE.AmbientLight(0x404040);
+          scene.add(light);
+          var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+          scene.add(directionalLight);
+
           x = x + xspeed;
           y = y + yspeed;
           z = z + zspeed;
-          generateSnake(x, y, z);
-          generateSnake(fruitx, fruity, fruitz);
+
+          tail.forEach(function (item) {
+            generateSnake(item.x, item.y, item.z);
+            console.log("it worked!");
+            console.log(tail);
+          });
+          // generateSnake(x, y, z);
+          generateFruit(fruitx, fruity, fruitz);
 
           if (x === fruitx && y === fruity && z === fruitz) {
-            console.log("it worked");
+            length = length + 1;
+            console.log(length);
           }
-        }, 500);
+
+          tail.push({ x, y, z });
+          var i = 1;
+          while (tail.length > length) {
+            tail.shift();
+            i = i + 1;
+          }
+        }, 200);
+
         document.addEventListener("keydown", function (event) {
           if (event.code == "KeyS") {
             xspeed = 0;
@@ -95,12 +121,6 @@
         });
       }
       setup();
-
-      //lights
-      var light = new THREE.AmbientLight(0x404040);
-      scene.add(light);
-      var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-      scene.add(directionalLight);
 
       //render
       function render() {
