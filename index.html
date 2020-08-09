@@ -24,33 +24,32 @@
         color: 0x000000,
       });
 
-      var geometry = new THREE.Geometry();
-
-      geometry.vertices = [];
       function generateGridCube(x, y, z) {
-        geometry.vertices.push(new THREE.Vector3(-x, -y, -z));
-        geometry.vertices.push(new THREE.Vector3(-x, -y, z));
-        geometry.vertices.push(new THREE.Vector3(-x, y, z));
+        var geometry = new THREE.Geometry();
+
+        geometry.vertices = [];
+        geometry.vertices.push(new THREE.Vector3(x - 1, y - 1, z - 1));
+        geometry.vertices.push(new THREE.Vector3(x - 1, y - 1, z));
+        geometry.vertices.push(new THREE.Vector3(x - 1, y, z));
         geometry.vertices.push(new THREE.Vector3(x, y, z));
-        geometry.vertices.push(new THREE.Vector3(x, y, -z));
-        geometry.vertices.push(new THREE.Vector3(-x, y, -z));
-        geometry.vertices.push(new THREE.Vector3(-x, -y, -z));
-        geometry.vertices.push(new THREE.Vector3(x, -y, -z));
-        geometry.vertices.push(new THREE.Vector3(x, -y, z));
-        geometry.vertices.push(new THREE.Vector3(-x, -y, z));
-        geometry.vertices.push(new THREE.Vector3(-x, y, z));
-        geometry.vertices.push(new THREE.Vector3(-x, y, -z));
-        geometry.vertices.push(new THREE.Vector3(x, y, -z));
-        geometry.vertices.push(new THREE.Vector3(x, -y, -z));
-        geometry.vertices.push(new THREE.Vector3(x, -y, z));
+        geometry.vertices.push(new THREE.Vector3(x, y, z - 1));
+        geometry.vertices.push(new THREE.Vector3(x - 1, y, z - 1));
+        geometry.vertices.push(new THREE.Vector3(x - 1, y - 1, z - 1));
+        geometry.vertices.push(new THREE.Vector3(x, y - 1, z - 1));
+        geometry.vertices.push(new THREE.Vector3(x, y - 1, z));
+        geometry.vertices.push(new THREE.Vector3(x - 1, y - 1, z));
+        geometry.vertices.push(new THREE.Vector3(x - 1, y, z));
+        geometry.vertices.push(new THREE.Vector3(x - 1, y, z - 1));
+        geometry.vertices.push(new THREE.Vector3(x, y, z - 1));
+        geometry.vertices.push(new THREE.Vector3(x, y - 1, z - 1));
+        geometry.vertices.push(new THREE.Vector3(x, y - 1, z));
         geometry.vertices.push(new THREE.Vector3(x, y, z));
+        var line = new THREE.Line(geometry, material);
+        scene.add(line);
+        camera.position.z = 4;
       }
 
       generateGridCube(1, 1, 1);
-
-      var line = new THREE.Line(geometry, material);
-      scene.add(line);
-      camera.position.z = 4;
 
       function render() {
         requestAnimationFrame(render);
