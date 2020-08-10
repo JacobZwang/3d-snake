@@ -9,7 +9,7 @@
     <script>
       var scene = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera(
-        35,
+        45,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
@@ -22,7 +22,7 @@
 
       camera.position.z = 25;
       camera.position.y = 5;
-      camera.position.x = 4;
+      camera.position.x = 5;
 
       var geometry = new THREE.BoxGeometry();
       function generateSnake(x, y, z) {
@@ -94,7 +94,7 @@
             scene.remove(scene.children[0]);
           }
 
-          generateGridCube(10, 10, 10);
+          generateGridCube(10, 10, 12);
 
           var light = new THREE.AmbientLight(0x404040);
           scene.add(light);
