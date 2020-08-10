@@ -1,4 +1,5 @@
-##3d Snake
+## 3d Snake
+[See Website](jacobzwang.com/3d-snake).
 Inspiration
 The game snake is a classic, it's simple, easy to understand and runs on just about anything. I noticed that next to no one have ever made the game in 3d. And I don't mean it looks 3d, I mean the snake moves in 3d dimensions.
 
